@@ -74,7 +74,7 @@ public class CollectionUtility {
 		myList.add("2");
 		myList.add("3");
 		List<Integer> myIntegerList = castStringList(myList, Integer.class);
-		System.out.println(myIntegerCollection);
+//		System.out.println(myIntegerCollection);
 	}
 
 }

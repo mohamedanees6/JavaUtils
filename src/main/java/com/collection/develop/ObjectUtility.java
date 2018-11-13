@@ -15,7 +15,7 @@ public class ObjectUtility {
 
 
 	public static void main(String[] args) {
-		
+
 	}
 
 }
