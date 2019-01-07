@@ -6,7 +6,6 @@ package com.collection.develop;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -67,14 +66,25 @@ public class CollectionUtility {
 		return (List<T>) castStringCollection(collection, clazz);
 	}
 
+	public static <T> List<T> getCastedList(List<Object> objList, Class<T> clazz) {
+		List<T> newList = new ArrayList<T>();
+		if (objList != null) {
+			for (Object object : objList) {
+				if (object != null && clazz.isAssignableFrom(object.getClass())) {
+					newList.add((T) object);
+				}
+			}
+		}
+		return newList;
+	}
+
 	// For Development purpose
 	public static void main(String[] args) throws Exception {
-		List<String> myList = new ArrayList<String>();
-		myList.add("1");
-		myList.add("2");
-		myList.add("3");
-		List<Integer> myIntegerList = castStringList(myList, Integer.class);
-//		System.out.println(myIntegerCollection);
+		List<Object> myList = new ArrayList<Object>();
+		Hello h= new Hello();
+		myList.add(h);
+		List<Hello> castedList = (List<Hello>) getCastedList(myList, Class.forName("Hello"));
+		
 	}
 
 }
