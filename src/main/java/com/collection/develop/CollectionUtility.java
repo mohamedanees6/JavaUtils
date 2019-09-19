@@ -3,9 +3,20 @@
 */
 package com.collection.develop;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -78,13 +89,39 @@ public class CollectionUtility {
 		return newList;
 	}
 
+	public static <T, K, V> void myFunction(Class<T> keyClass, Map<K, V> map)
+			throws InstantiationException, IllegalAccessException {
+
+	}
+
+	public static File readTimeOut(final String filePath, int timeOutInMillis) throws InterruptedException, ExecutionException, TimeoutException {
+		ExecutorService executor = Executors.newFixedThreadPool(1);
+		FutureTask<File> futureFile = new FutureTask<File>(new Callable<File>() {
+
+			public File call() throws Exception {
+				System.out.println("I am called");
+				return new File("/usr/mohamed");
+			}
+
+		});
+		executor.execute(futureFile);
+		return futureFile.get(3, TimeUnit.NANOSECONDS);
+	}
+
 	// For Development purpose
 	public static void main(String[] args) throws Exception {
-		List<Object> myList = new ArrayList<Object>();
-		Hello h= new Hello();
-		myList.add(h);
-		List<Hello> castedList = (List<Hello>) getCastedList(myList, Class.forName("Hello"));
+		System.out.println(readTimeOut(null, 20));
 		
 	}
+	
+	public static void hangTheThread() {
+	    while(true){
+	      
+	    }
+	}
+
+  public static<T> ArrayList<T> createArrayList(T class1) {
+    return new ArrayList<? extends T>();
+  }
 
 }
